@@ -7,8 +7,13 @@
  *
  */
  
- #ifndef _OFX_SPEECH_
- #define _OFX_SPEECH_
+#ifndef _OFX_SPEECH_
+#define _OFX_SPEECH_
+
+//-- Add speech recognition
+#include "ofxSpeechRecognizer.h"
+
+//-- Add speech synthesis
+#include "ofxSpeechSynthesizer.h"
  
- 
- #endif
+#endif

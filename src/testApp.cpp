@@ -3,6 +3,14 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
+    recognizer.initRecognizer();
+    words.push_back("red");
+    words.push_back("green");
+    words.push_back("blue");
+    
+    recognizer.addVocabulary(words);
+    
+    recognizer.startRecognizer();
 }
 
 //--------------------------------------------------------------

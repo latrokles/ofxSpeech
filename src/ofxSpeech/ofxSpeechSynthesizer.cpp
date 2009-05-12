@@ -6,3 +6,5 @@
  *  Copyright 2009 Samurai Hippo. All rights reserved.
  *
  */
+ 
+ #include "ofxSpeechSynthesizer.h"

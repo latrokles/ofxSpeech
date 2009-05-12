@@ -2,6 +2,7 @@
 #define _TEST_APP
 
 #include "ofMain.h"
+#include "ofxSpeech.h"
 
 class testApp : public ofBaseApp{
 
@@ -17,7 +18,11 @@ class testApp : public ofBaseApp{
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
 		void resized(int w, int h);
-
+        
+        
+        //-- test stuff for speech addon
+        ofxSpeechRecognizer         recognizer;
+        vector<string>              words;
 };
 
 #endif
