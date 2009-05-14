@@ -19,10 +19,10 @@ class testApp : public ofBaseApp{
 		void mouseReleased(int x, int y, int button);
 		void resized(int w, int h);
         
-        
         //-- test stuff for speech addon
         ofxSpeechRecognizer         recognizer;
         vector<string>              words;
+        bool                        redBackground;
 };
 
 #endif

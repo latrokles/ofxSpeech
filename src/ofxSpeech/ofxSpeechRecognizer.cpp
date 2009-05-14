@@ -8,6 +8,9 @@
  */
 #include "ofxSpeechRecognizer.h"
 
+//callback
+void    (*ofxSpeechRecognizer::testAppCallback)(char *);
+
 ofxSpeechRecognizer::ofxSpeechRecognizer()
 {
     listening = false;
@@ -35,6 +38,11 @@ void ofxSpeechRecognizer::initRecognizer()
     {
         errorStatus = SRNewRecognizer(recognitionSystem, &speechRecognizer, kSRDefaultSpeechSource);
     }
+}
+
+void ofxSpeechRecognizer::setCallback( void(*callback)(char *))
+{
+    testAppCallback = callback;
 }
 
 void ofxSpeechRecognizer::addVocabulary(std::vector<std::string> wordsToRecognize)
@@ -94,5 +102,40 @@ bool ofxSpeechRecognizer::isListening()
 
 pascal OSErr HandleSpeechDoneAppleEvent(const AppleEvent *theAEevt, AppleEvent* reply, long refcon)
 {
+    //-- Some debugging output
     std::cout << "Speech Event Detected" << std::endl;
+
+    long                actualSize;
+    DescType            actualType;
+    OSErr               errorStatus = 0, recStatus = 0;
+    SRRecognitionResult recognitionResult;
+    char                resultStr[MAX_RECOGNITION_LEN];
+    Size                len;
+    
+    //-- Check status of the speech recognizer
+    errorStatus = AEGetParamPtr(theAEevt, keySRSpeechStatus, typeShortInteger, &actualType, (Ptr)&recStatus, sizeof(errorStatus), &actualSize);
+    
+    //-- Get the recognition result object from the recognizer
+    if(!errorStatus && !recStatus)
+    {
+        errorStatus = AEGetParamPtr(theAEevt, keySRSpeechResult, typeSRSpeechResult, &actualType, (Ptr)&recognitionResult, sizeof(SRRecognitionResult), &actualSize);
+    }
+    
+    //-- Extract the words recognized in the result object
+    if(!errorStatus)
+    {
+        len = MAX_RECOGNITION_LEN - 1;
+        errorStatus = SRGetProperty(recognitionResult, kSRTEXTFormat, resultStr, &len);
+        
+        if(!errorStatus)
+        {
+            resultStr[0] = len;
+            
+            //-- We are done with the recognition result object, we can release it now
+            SRReleaseObject(recognitionResult);
+            
+            //-- Here we call our function pointer to testApp (temporary), a POCO event would be much better.
+            ofxSpeechRecognizer::testAppCallback(resultStr);
+        }
+    }
 }

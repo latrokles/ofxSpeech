@@ -8,8 +8,9 @@ void testApp::setup(){
     words.push_back("green");
     words.push_back("blue");
     
-    recognizer.addVocabulary(words);
+    redBackground = false;
     
+    recognizer.addVocabulary(words);
     recognizer.startRecognizer();
 }
 
@@ -19,6 +20,8 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    if(redBackground)
+        ofBackground(255, 0, 0);
 }
 
 
@@ -46,4 +49,3 @@ void testApp::mouseReleased(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::resized(int w, int h){
 }
-
