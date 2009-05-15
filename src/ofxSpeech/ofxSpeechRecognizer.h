@@ -15,6 +15,7 @@
 #include <string>
 #include <iostream>
 
+#include "ofEvents.h"
 /*
  * Callback function for the speech recognition events in Carbon
  */
@@ -43,6 +44,8 @@ class ofxSpeechRecognizer
         //Variables for Carbon Speech
         SRRecognitionSystem         recognitionSystem;
         SRRecognizer                speechRecognizer;
+        
+        ofEvent<std::string>        speechRecognizedEvent;
     
         
 };

@@ -19,6 +19,10 @@ class testApp : public ofBaseApp{
 		void mouseReleased(int x, int y, int button);
 		void resized(int w, int h);
         
+        //-- test event handler for speech recognition, 
+        //-- I will probably just subclass testApp as it is the preferred method.
+        void speechRecognized(string wordRecognized);
+        
         //-- test stuff for speech addon
         ofxSpeechRecognizer         recognizer;
         vector<string>              words;

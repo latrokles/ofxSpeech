@@ -14,6 +14,7 @@ void    (*ofxSpeechRecognizer::testAppCallback)(char *);
 ofxSpeechRecognizer::ofxSpeechRecognizer()
 {
     listening = false;
+    //ofAddListener(speechRecognizedEvent, &testApp::speechRecognized);
 }
 
 void ofxSpeechRecognizer::initRecognizer()
