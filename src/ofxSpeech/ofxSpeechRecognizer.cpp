@@ -7,6 +7,21 @@
  *
  */
 #include "ofxSpeechRecognizer.h"
+ofEvent<std::string>        ofxSpeechRecognizer::speechRecognizedEvent;
+
+void cleanUpString(std::string &stringToClean)
+{
+    if(!stringToClean.empty())
+    {
+        int firstCharacter      = stringToClean.find_first_not_of(" ");
+        int lastCharacter       = stringToClean.find_last_not_of(" ");
+        std::string tempString  = stringToClean;
+        stringToClean.erase();
+        
+        stringToClean           = tempString.substr(firstCharacter, (lastCharacter-firstCharacter + 1));
+    }
+    
+}
 
 ofxSpeechRecognizer::ofxSpeechRecognizer()
 {
@@ -92,15 +107,10 @@ bool ofxSpeechRecognizer::isListening()
     return listening;
 }
 
-void ofxSpeechRecognizer::notifyListeners(std::string wordRecognized)
-{
-    ofNotifyEvent(speechRecognizedEvent, wordRecognized, this);
-}
-
 pascal OSErr ofxSpeechRecognizer::handleSpeechDone(const AppleEvent *theAEevt, AppleEvent* reply, long refcon)
 {
     //-- Some debugging output
-    std::cout << "Speech Event Detected" << std::endl;
+    //std::cout << "Speech Event Detected" << std::endl;
 
     long                actualSize;
     DescType            actualType;
@@ -126,12 +136,18 @@ pascal OSErr ofxSpeechRecognizer::handleSpeechDone(const AppleEvent *theAEevt, A
         
         if(!errorStatus)
         {
-            resultStr[0] = len;
+            //resultStr[0] = len;
             
             //-- We are done with the recognition result object, we can release it now
             SRReleaseObject(recognitionResult);
             
             std::string wordRecognized = std::string(resultStr);
+            
+            //-- Some debugging output
+            std::cout << "Word recognized is: " << wordRecognized << std::endl;
+            
+            //-- Clean up leading and trailing blanks in the recognized string
+            cleanUpString(wordRecognized);
             
             //-- Notify our speechRecognizedEvent listeners.
             ofNotifyEvent(speechRecognizedEvent, wordRecognized);

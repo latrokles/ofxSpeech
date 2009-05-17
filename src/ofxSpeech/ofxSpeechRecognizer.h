@@ -16,6 +16,8 @@
 #include <iostream>
 
 #include "ofEvents.h"
+//-- Short function to clean up the detected string
+void cleanUpString(std::string &stringToClean);
 
 class ofxSpeechRecognizer
 {
@@ -34,14 +36,11 @@ class ofxSpeechRecognizer
         static ofEvent<std::string>  speechRecognizedEvent;
         
     private:
-    
-        void notifyListeners(std::string wordRecognized);
-        
-        // Variables to store vocabulary and state
+        //-- Variables to store vocabulary and state
         std::vector<std::string>     vocabulary;
         bool                         listening;
         
-        //Variables for Carbon Speech
+        //-- Variables for Carbon Speech
         SRRecognitionSystem          recognitionSystem;
         SRRecognizer                 speechRecognizer;
 };
