@@ -4,7 +4,7 @@
 #include "ofMain.h"
 #include "ofxSpeech.h"
 
-class testApp : public ofBaseApp, public ofxSpeechListener{
+class testApp : public ofBaseApp{
 
 	public:
 
@@ -20,8 +20,7 @@ class testApp : public ofBaseApp, public ofxSpeechListener{
 		void resized(int w, int h);
         
         //-- test event handler for speech recognition, 
-        //-- I will probably just subclass testApp as it is the preferred method.
-        void speechRecognized(ofxSpeechArgs & speechArgs);
+        void speechRecognized(string & wordRecognized);
         
         //-- test stuff for speech addon
         ofxSpeechRecognizer         recognizer;

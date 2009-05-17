@@ -18,7 +18,7 @@ void ofxSpeechRecognizer::initRecognizer()
     OSErr errorStatus;
     
     //-- Install eventHandler
-    errorStatus = AEInstallEventHandler(kAESpeechSuite, kAESpeechDone, NewAEEventHandlerUPP(HandleSpeechDoneAppleEvent), 0, false);
+    errorStatus = AEInstallEventHandler(kAESpeechSuite, kAESpeechDone, NewAEEventHandlerUPP((AEEventHandlerProcPtr)handleSpeechDone), 0, false);
     
     //-- Open the recognition system
     errorStatus = SROpenRecognitionSystem(&recognitionSystem, kSRDefaultRecognitionSystemID);
@@ -92,7 +92,12 @@ bool ofxSpeechRecognizer::isListening()
     return listening;
 }
 
-pascal OSErr HandleSpeechDoneAppleEvent(const AppleEvent *theAEevt, AppleEvent* reply, long refcon)
+void ofxSpeechRecognizer::notifyListeners(std::string wordRecognized)
+{
+    ofNotifyEvent(speechRecognizedEvent, wordRecognized, this);
+}
+
+pascal OSErr ofxSpeechRecognizer::handleSpeechDone(const AppleEvent *theAEevt, AppleEvent* reply, long refcon)
 {
     //-- Some debugging output
     std::cout << "Speech Event Detected" << std::endl;
@@ -126,8 +131,10 @@ pascal OSErr HandleSpeechDoneAppleEvent(const AppleEvent *theAEevt, AppleEvent* 
             //-- We are done with the recognition result object, we can release it now
             SRReleaseObject(recognitionResult);
             
-            //-- Here we call our function pointer to testApp (temporary), a POCO event would be much better.
-            //ofxSpeechRecognizer::testAppCallback(resultStr);
+            std::string wordRecognized = std::string(resultStr);
+            
+            //-- Notify our speechRecognizedEvent listeners.
+            ofNotifyEvent(speechRecognizedEvent, wordRecognized);
         }
     }
 }

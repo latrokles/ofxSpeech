@@ -12,7 +12,7 @@ void testApp::setup(){
     
     recognizer.addVocabulary(words);
     recognizer.startRecognizer();
-    //ofAddListener(speechEvents.speechRecognized, this, &testApp::speechRecognized);
+    //ofAddListener(recognizer.speechRecognizedEvent, this, &testApp::speechRecognized);
 }
 
 //--------------------------------------------------------------
@@ -51,6 +51,6 @@ void testApp::mouseReleased(int x, int y, int button){
 void testApp::resized(int w, int h){
 }
 
-void testApp::speechRecognized(ofxSpeechArgs & speechArgs)
+void testApp::speechRecognized(string & wordRecognized)
 {
 }

@@ -87,7 +87,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		05931C060FBF1D8E00B85C38 /* ofxSpeechListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxSpeechListener.h; path = src/ofxSpeech/ofxSpeechListener.h; sourceTree = SOURCE_ROOT; };
 		05FF03680FB8F4AE005A8882 /* ofxSpeech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxSpeech.h; path = src/ofxSpeech/ofxSpeech.h; sourceTree = SOURCE_ROOT; };
 		05FF03690FB8F4AE005A8882 /* ofxSpeechRecognizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxSpeechRecognizer.cpp; path = src/ofxSpeech/ofxSpeechRecognizer.cpp; sourceTree = SOURCE_ROOT; };
 		05FF036A0FB8F4AE005A8882 /* ofxSpeechRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxSpeechRecognizer.h; path = src/ofxSpeech/ofxSpeechRecognizer.h; sourceTree = SOURCE_ROOT; };
@@ -408,7 +407,6 @@
 				05FF036A0FB8F4AE005A8882 /* ofxSpeechRecognizer.h */,
 				05FF036B0FB8F4AE005A8882 /* ofxSpeechSynthesizer.cpp */,
 				05FF036C0FB8F4AE005A8882 /* ofxSpeechSynthesizer.h */,
-				05931C060FBF1D8E00B85C38 /* ofxSpeechListener.h */,
 			);
 			name = ofxSpeech;
 			sourceTree = "<group>";

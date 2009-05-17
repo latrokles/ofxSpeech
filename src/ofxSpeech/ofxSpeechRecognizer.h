@@ -15,12 +15,7 @@
 #include <string>
 #include <iostream>
 
-#include "ofxSpeechListener.h"
-
-/*
- * Callback function for the speech recognition events in Carbon
- */
-pascal OSErr HandleSpeechDoneAppleEvent(const AppleEvent *theAEevt, AppleEvent* reply, long refcon);
+#include "ofEvents.h"
 
 class ofxSpeechRecognizer
 {
@@ -32,7 +27,16 @@ class ofxSpeechRecognizer
         void stopRecognizer();
         bool isListening();
         
+        /*
+         * Callback function for the speech recognition events in Carbon
+         */
+        static pascal OSErr handleSpeechDone(const AppleEvent *theAEevt, AppleEvent* reply, long refcon);
+        static ofEvent<std::string>  speechRecognizedEvent;
+        
     private:
+    
+        void notifyListeners(std::string wordRecognized);
+        
         // Variables to store vocabulary and state
         std::vector<std::string>     vocabulary;
         bool                         listening;
@@ -40,8 +44,6 @@ class ofxSpeechRecognizer
         //Variables for Carbon Speech
         SRRecognitionSystem          recognitionSystem;
         SRRecognizer                 speechRecognizer;
-        
-        
 };
 #endif
  
