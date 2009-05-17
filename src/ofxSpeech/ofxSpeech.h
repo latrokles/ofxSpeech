@@ -15,5 +15,8 @@
 
 //-- Add speech synthesis
 #include "ofxSpeechSynthesizer.h"
+
+//-- Add the listener class that defines the speech event handlers
+#include "ofxSpeechListener.h"
  
 #endif

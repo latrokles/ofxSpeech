@@ -8,13 +8,9 @@
  */
 #include "ofxSpeechRecognizer.h"
 
-//callback
-void    (*ofxSpeechRecognizer::testAppCallback)(char *);
-
 ofxSpeechRecognizer::ofxSpeechRecognizer()
 {
     listening = false;
-    //ofAddListener(speechRecognizedEvent, &testApp::speechRecognized);
 }
 
 void ofxSpeechRecognizer::initRecognizer()
@@ -39,11 +35,6 @@ void ofxSpeechRecognizer::initRecognizer()
     {
         errorStatus = SRNewRecognizer(recognitionSystem, &speechRecognizer, kSRDefaultSpeechSource);
     }
-}
-
-void ofxSpeechRecognizer::setCallback( void(*callback)(char *))
-{
-    testAppCallback = callback;
 }
 
 void ofxSpeechRecognizer::addVocabulary(std::vector<std::string> wordsToRecognize)
@@ -136,7 +127,7 @@ pascal OSErr HandleSpeechDoneAppleEvent(const AppleEvent *theAEevt, AppleEvent* 
             SRReleaseObject(recognitionResult);
             
             //-- Here we call our function pointer to testApp (temporary), a POCO event would be much better.
-            ofxSpeechRecognizer::testAppCallback(resultStr);
+            //ofxSpeechRecognizer::testAppCallback(resultStr);
         }
     }
 }

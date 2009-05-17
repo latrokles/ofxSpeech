@@ -15,7 +15,8 @@
 #include <string>
 #include <iostream>
 
-#include "ofEvents.h"
+#include "ofxSpeechListener.h"
+
 /*
  * Callback function for the speech recognition events in Carbon
  */
@@ -26,15 +27,10 @@ class ofxSpeechRecognizer
     public:
         ofxSpeechRecognizer();
         void initRecognizer();
-        void setCallback(void (*callback)(char *));
         void addVocabulary(std::vector<std::string> wordsToRecognize);
         void startRecognizer();
         void stopRecognizer();
         bool isListening();
-        
-        //testApp Callback pointer... this will be replaced by an actual
-        //event and event callback using poco
-        static void                 (*testAppCallback)(char *);
         
     private:
         // Variables to store vocabulary and state
@@ -42,11 +38,9 @@ class ofxSpeechRecognizer
         bool                         listening;
         
         //Variables for Carbon Speech
-        SRRecognitionSystem         recognitionSystem;
-        SRRecognizer                speechRecognizer;
+        SRRecognitionSystem          recognitionSystem;
+        SRRecognizer                 speechRecognizer;
         
-        ofEvent<std::string>        speechRecognizedEvent;
-    
         
 };
 #endif
