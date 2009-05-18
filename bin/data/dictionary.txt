@@ -1,0 +1,6 @@
+red
+hi
+hello
+green
+black
+white

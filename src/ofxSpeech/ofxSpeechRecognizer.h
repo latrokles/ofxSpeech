@@ -10,10 +10,13 @@
 #ifndef _OFX_SPEECH_RECOGNIZER_
 #define _OFX_SPEECH_RECOGNIZER_
 #define MAX_RECOGNITION_LEN 512
+
+#include "ofMain.h"
 #include <Carbon/Carbon.h>
 #include <vector>
 #include <string>
 #include <iostream>
+#include <fstream>
 
 #include "ofEvents.h"
 //-- Short function to clean up the detected string
@@ -24,7 +27,8 @@ class ofxSpeechRecognizer
     public:
         ofxSpeechRecognizer();
         void initRecognizer();
-        void addVocabulary(std::vector<std::string> wordsToRecognize);
+        void addDictionary(const std::vector<std::string> &wordsToRecognize);
+        void addDictionaryFromFile(std::string dictionaryFilename);
         void startRecognizer();
         void stopRecognizer();
         bool isListening();

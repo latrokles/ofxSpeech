@@ -4,15 +4,18 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     recognizer.initRecognizer();
+    
+    /*
+    //-- loading from a vector of strings
     words.push_back("red");
     words.push_back("green");
-    words.push_back("Hi");
-    words.push_back("hello");
-    words.push_back("blue");
+    words.push_back("black");
+    recognizer.addDictionary(words);
+    */
     
-    redBackground = false;
+    //-- loading directly from a dictionary file
+    recognizer.addDictionaryFromFile("dictionary.txt");
     
-    recognizer.addVocabulary(words);
     recognizer.startRecognizer();
     ofAddListener(recognizer.speechRecognizedEvent, this, &testApp::speechRecognized);
 }
@@ -23,10 +26,6 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    if(redBackground)
-    {
-        ofBackground(255, 0, 0);
-    }
 }
 
 
@@ -66,5 +65,13 @@ void testApp::speechRecognized(string & wordRecognized)
     else if(wordRecognized == "green")
     {
         ofBackground(0, 255, 0);
+    }
+    else if(wordRecognized == "black")
+    {
+        ofBackground(0, 0, 0);
+    }
+    else if(wordRecognized == "white")
+    {
+        ofBackground(255, 255, 255);
     }
 }
