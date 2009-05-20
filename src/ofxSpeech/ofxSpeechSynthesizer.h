@@ -12,6 +12,8 @@
  
  #include <vector>
  #include <string>
+ #include <iostream>
+ #include <Carbon/Carbon.h>
  
  class ofxSpeechSynthesizer
  {
@@ -20,10 +22,13 @@
         void initSynthesizer();
         void selectVoice(std::string voice);
         std::vector<std::string> getListOfVoices();
+        void displayVoices();
         void speakWord(std::string wordToSpeak);
         
     private:
         std::vector<std::string>    voices;
+        bool                        isSpeaking;
+        SpeechChannel               speechChannel;
         
  };
  #endif

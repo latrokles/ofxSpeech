@@ -4,6 +4,8 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     recognizer.initRecognizer();
+    synthesizer.initSynthesizer();
+    synthesizer.displayVoices();
     
     /*
     //-- loading from a vector of strings
@@ -57,7 +59,7 @@ void testApp::resized(int w, int h){
 
 void testApp::speechRecognized(string & wordRecognized)
 {
-    cout << "event handler notified and string detected was: " << wordRecognized << endl;
+    //cout << "event handler notified and string detected was: " << wordRecognized << endl;
     if(wordRecognized == "red")
     {
         ofBackground(255, 0, 0);

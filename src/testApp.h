@@ -24,6 +24,7 @@ class testApp : public ofBaseApp{
         
         //-- test stuff for speech addon
         ofxSpeechRecognizer         recognizer;
+        ofxSpeechSynthesizer        synthesizer;
         vector<string>              words;
         bool                        redBackground;
 };
