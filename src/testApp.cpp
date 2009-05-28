@@ -5,7 +5,7 @@
 void testApp::setup(){
     recognizer.initRecognizer();
     synthesizer.initSynthesizer();
-    synthesizer.displayVoices();
+    synthesizer.listVoices();
     
     /*
     //-- loading from a vector of strings

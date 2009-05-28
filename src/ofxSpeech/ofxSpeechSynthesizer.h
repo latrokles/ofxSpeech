@@ -19,10 +19,10 @@
  {
     public:
         ofxSpeechSynthesizer();
-        void initSynthesizer();
+        void initSynthesizer(std::string voice="");
         void selectVoice(std::string voice);
         std::vector<std::string> getListOfVoices();
-        void displayVoices();
+        void listVoices();
         void speakWord(std::string wordToSpeak);
         
     private:
