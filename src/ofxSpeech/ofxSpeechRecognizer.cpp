@@ -68,7 +68,7 @@ void ofxSpeechRecognizer::initRecognizer()
  * creates a language model and adds the words contained in the wordsToRecognize
  * vector to said language model.
  */
-void ofxSpeechRecognizer::addDictionary(const std::vector<std::string> &wordsToRecognize)
+void ofxSpeechRecognizer::loadDictionary(const std::vector<std::string> &wordsToRecognize)
 {
     //-- If wordsToRecognize is empty, don't bother
     if(!wordsToRecognize.empty())
@@ -112,7 +112,7 @@ void ofxSpeechRecognizer::addDictionary(const std::vector<std::string> &wordsToR
  * Opens dictionaryFilename, reads its contents and loads them into a vector of
  * strings to them pass them along to addDictionary.
  */
-void ofxSpeechRecognizer::addDictionaryFromFile(std::string dictionaryFilename)
+void ofxSpeechRecognizer::loadDictionaryFromFile(std::string dictionaryFilename)
 {
     dictionaryFilename          = ofToDataPath(dictionaryFilename);
     std::vector<std::string>    dictionary;
@@ -133,13 +133,13 @@ void ofxSpeechRecognizer::addDictionaryFromFile(std::string dictionaryFilename)
      * that I can do keep the language model creation code in one place. 
      * Something to consider.
      */
-    addDictionary(dictionary);
+    loadDictionary(dictionary);
 }
 
 /*
  * Starts the recognizer if it's not already running
  */
-void ofxSpeechRecognizer::startRecognizer()
+void ofxSpeechRecognizer::startListening()
 {
     if(!listening)
     {
@@ -152,7 +152,7 @@ void ofxSpeechRecognizer::startRecognizer()
 /*
  *  Stops the recoginzer if it's running
  */
-void ofxSpeechRecognizer::stopRecognizer()
+void ofxSpeechRecognizer::stopListening()
 {
     if(listening)
     {

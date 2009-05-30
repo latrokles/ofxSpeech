@@ -8,18 +8,10 @@ void testApp::setup(){
     synthesizer.listVoices();
     synthesizer.getCurrentVoice();
     
-    /*
-    //-- loading from a vector of strings
-    words.push_back("red");
-    words.push_back("green");
-    words.push_back("black");
-    recognizer.addDictionary(words);
-    */
-    
     //-- loading directly from a dictionary file
-    recognizer.addDictionaryFromFile("dictionary.txt");
+    recognizer.loadDictionaryFromFile("dictionary.txt");
     
-    recognizer.startRecognizer();
+    recognizer.startListening();
     ofAddListener(recognizer.speechRecognizedEvent, this, &testApp::speechRecognized);
 }
 
@@ -34,7 +26,33 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed  (int key){
+
+    if(key == 'd')
+    {
+        synthesizer.setDigitByDigit(true);
+    }
     
+    if(key == 'c')
+    {
+        synthesizer.setCharacterByCharacter(true);
+        synthesizer.setDigitByDigit(false);
+    }
+    
+    if(key == 'n')
+    {
+        synthesizer.setDigitByDigit(false);
+        synthesizer.setCharacterByCharacter(false);
+    }
+    
+    if(key == 'p')
+    {
+        synthesizer.pauseSpeaking();
+    }
+    
+    if(key == 't')
+    {
+        synthesizer.continueSpeaking();
+    }
 }
 
 //--------------------------------------------------------------

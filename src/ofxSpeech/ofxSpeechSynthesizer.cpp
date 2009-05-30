@@ -120,3 +120,45 @@ void ofxSpeechSynthesizer::speakPhrase(std::string phraseToSpeak)
     
     errorStatus = SpeakText(speechChannel, phraseToSpeak.c_str(), phraseToSpeak.length());
 }
+
+void ofxSpeechSynthesizer::pauseSpeaking()
+{
+    OSErr       errorStatus;
+    errorStatus = PauseSpeechAt(speechChannel, kImmediate);
+}
+
+void ofxSpeechSynthesizer::stopSpeaking()
+{
+    OSErr       errorStatus;
+    errorStatus = StopSpeech(speechChannel);
+}
+
+void ofxSpeechSynthesizer::continueSpeaking()
+{
+    OSErr       errorStatus;
+    errorStatus = ContinueSpeech(speechChannel);
+}
+
+void ofxSpeechSynthesizer::setDigitByDigit(bool enable)
+{
+    OSErr       errorStatus;
+    OSType      theMode;
+    if(enable)
+        theMode = modeLiteral;
+    else
+        theMode = modeNormal;
+    
+    errorStatus = SetSpeechInfo(speechChannel, soNumberMode, &theMode);
+}
+
+void ofxSpeechSynthesizer::setCharacterByCharacter(bool enable)
+{
+    OSErr       errorStatus;
+    OSType      theMode;
+    if(enable)
+        theMode = modeLiteral;
+    else
+        theMode = modeNormal;
+    
+    errorStatus = SetSpeechInfo(speechChannel, soCharacterMode, &theMode);
+}

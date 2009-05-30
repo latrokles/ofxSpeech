@@ -26,11 +26,22 @@ class ofxSpeechRecognizer
 {
     public:
         ofxSpeechRecognizer();
+        //-- Initializes the speech recognition system
         void initRecognizer();
-        void addDictionary(const std::vector<std::string> &wordsToRecognize);
-        void addDictionaryFromFile(std::string dictionaryFilename);
-        void startRecognizer();
-        void stopRecognizer();
+        
+        //-- loads a list of words that you want the system to recognizer
+        void loadDictionary(const std::vector<std::string> &wordsToRecognize);
+        
+        //-- same as above, but it loads the words from a textfile in your data directory
+        void loadDictionaryFromFile(std::string dictionaryFilename);
+        
+        //-- tells the recognition system to start listening for words
+        void startListening();
+        
+        //-- tells the recognition system to stop listening for words
+        void stopListening();
+        
+        //-- returns the status of the recognition system
         bool isListening();
         
         /*
