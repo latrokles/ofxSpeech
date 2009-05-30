@@ -50,7 +50,7 @@ ofxSpeechSynthesizer::ofxSpeechSynthesizer()
                     voiceName[i] = theVoiceDescription.name[i+1];
                 }         
                 std::string aVoice = std::string(voiceName, voiceNameLength);
-                voices.push_back(aVoice);
+                voices[aVoice] = voiceIndex;
             }
         }
     }
@@ -64,28 +64,59 @@ ofxSpeechSynthesizer::ofxSpeechSynthesizer()
 void ofxSpeechSynthesizer::initSynthesizer(std::string voice)
 {
     std::cout << "Initiliazing synth" << std::endl;
+    OSErr           errorStatus;
+    VoiceSpec       theVoiceSpec;
+
+    std::cout << voice << std::endl;
+    if(voice == "")
+    {
+        //-- Create a speech channel with a null voice spec, this returns the default system voice
+        currentVoice = "Default";
+        errorStatus = NewSpeechChannel(NULL, &speechChannel);
+    }
+    else
+    {
+        //-- Create a speech channel with the voice spec that has the specified voice
+        currentVoice = voice;
+        short voiceIndex = voices[voice];
+        errorStatus = GetIndVoice(voiceIndex, &theVoiceSpec);
+        
+        if(!errorStatus)
+            errorStatus = NewSpeechChannel(&theVoiceSpec, &speechChannel);
+    }
 }
 
 void ofxSpeechSynthesizer::selectVoice(std::string voice)
 {
+    //-- Allow for this???
 }
 
-std::vector<std::string> ofxSpeechSynthesizer::getListOfVoices()
+std::map<std::string, int> ofxSpeechSynthesizer::getListOfVoices()
 {
     return voices;
+}
+
+std::string ofxSpeechSynthesizer::getCurrentVoice()
+{
+    std::cout << currentVoice << std::endl;
+    return currentVoice;
 }
 
 void ofxSpeechSynthesizer::listVoices()
 {
     if(voices.size() > 0)
     {
-        for(int voiceIndex = 0; voiceIndex < voices.size(); voiceIndex++)
+        std::map<std::string, int>::iterator iter;
+        for(iter = voices.begin(); iter != voices.end(); ++iter)
         {
-            std::cout << voices[voiceIndex] << std::endl;
+            std::cout << iter->second << ", " << iter->first << std::endl;
         }
     }
 }
 
-void ofxSpeechSynthesizer::speakWord(std::string wordToSpeak)
+void ofxSpeechSynthesizer::speakPhrase(std::string phraseToSpeak)
 {
+    OSErr   errorStatus;
+    
+    errorStatus = SpeakText(speechChannel, phraseToSpeak.c_str(), phraseToSpeak.length());
 }

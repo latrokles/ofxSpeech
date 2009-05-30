@@ -4,8 +4,9 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     recognizer.initRecognizer();
-    synthesizer.initSynthesizer();
+    synthesizer.initSynthesizer("Whisper");
     synthesizer.listVoices();
+    synthesizer.getCurrentVoice();
     
     /*
     //-- loading from a vector of strings
@@ -46,6 +47,7 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
+    synthesizer.speakPhrase("1000 elephants");
 }
 
 //--------------------------------------------------------------
@@ -63,6 +65,7 @@ void testApp::speechRecognized(string & wordRecognized)
     if(wordRecognized == "red")
     {
         ofBackground(255, 0, 0);
+        synthesizer.speakPhrase(wordRecognized);
     }
     else if(wordRecognized == "green")
     {

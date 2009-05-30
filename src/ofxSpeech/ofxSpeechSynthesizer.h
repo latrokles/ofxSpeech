@@ -10,7 +10,7 @@
  #ifndef _OFX_SPEECH_SYNTHESIZER_
  #define _OFX_SPEECH_SYNTHESIZER_
  
- #include <vector>
+ #include <map>
  #include <string>
  #include <iostream>
  #include <Carbon/Carbon.h>
@@ -21,12 +21,16 @@
         ofxSpeechSynthesizer();
         void initSynthesizer(std::string voice="");
         void selectVoice(std::string voice);
-        std::vector<std::string> getListOfVoices();
+        std::map<std::string, int> getListOfVoices();
+        std::string getCurrentVoice();
         void listVoices();
-        void speakWord(std::string wordToSpeak);
+        void speakPhrase(std::string phraseToSpeak);
+        void setDigitByDigit();
+        void setCharacterByCharacter();
         
     private:
-        std::vector<std::string>    voices;
+        std::map<std::string, int>  voices;
+        std::string                 currentVoice;
         bool                        isSpeaking;
         SpeechChannel               speechChannel;
         
