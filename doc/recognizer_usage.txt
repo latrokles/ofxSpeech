@@ -1,0 +1,40 @@
+ofxSpeechRecognizer usage:
+==========================
+Two things to keep in mind before beginning:
+- Add a function to your testApp.h/testApp.cpp that takes a string by reference, this function will get called when a word is recognized.
+i.e.
+void speechRecognized(string & wordRecognized);
+
+- In the testApp.cpp setup() function, add the function mentioned above as a listener to a speechRecognized event. 
+i.e.
+ofAddListener(recognizer.speechRecognizedEvent, this, &testApp::speechRecognized);
+
+ofxSpeechRecognizer recognizer;
+recognizer.initRecognizer();
+
+//You can load a list of words to recognize from a file in your data directory containing each word
+//in a separate line.
+recognizer.loadDictionaryFromFile("dictionary.txt");
+
+//Alternatively you can have a vector of words and add them that way
+vector<string> words;
+words.push_back("red");
+words.push_back("green");
+words.push_back("black");
+recognizer.loadDictionary(words);
+
+//startListening for words
+recognizer.startListening();
+
+//in the function defined in testApp.cpp place code to be executed once a given word is detected
+void testApp::speechRecognized(string & wordRecognized)
+{
+    if(wordRecognized == "red")
+        ofBackground(255, 0, 0);
+
+    if(wordRecognized == "green")
+        ofBackground(0, 255, 0);
+}
+
+//the recognized can be stopped
+recognizer.stopListening();

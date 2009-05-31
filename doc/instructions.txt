@@ -1,0 +1,14 @@
+ofxSpeech - May 30th 2009 - by Ruben Duque (latrokles)
+
+Installation:
+=============
+1. Place ofxSpeech in the addons folder.
+
+Adding to a Project:
+====================
+1. Add the ofxSpeech to your project in the IDE (Xcode presumably).
+2. Add #include "ofxSpeech.h" in your testApp.h
+
+Usage:
+======
+Usage for ofxSpeechRecognizer and ofxSpeechSynthesizer can be found in their respective usage files.

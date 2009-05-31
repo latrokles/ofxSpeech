@@ -1,0 +1,34 @@
+ofxSpeechSynthesizer usage:
+===========================
+//define and create an ofxSpeechSynthesizer object
+ofxSpeechSynthesizer synthesizer;
+
+//list available voices in the system
+synthesizer.listVoices();
+
+//initalize synthesizer with voice, if no voice is given the default system voice is used.
+synthesizer.initSynthesizer("Whisper");
+
+//speak a word or sentence
+synthesizer.speakPhrase("hello, this a test of the synthesizer");
+
+//to turn on spelling character by character
+synthesizer.setCharacterByCharacter(true);
+
+//to turn off spelling character by character
+synthesizer.setCharacterByCharacter(false);
+
+//to turn on digit by digit for numbers
+synthesizer.setDigitByDigit(true)
+
+//to turn off digit by digit for numbers
+synthesizer.setDigitByDigit(true)
+
+//to pause speaking
+synthesizer.pauseSpeaking();
+
+//to resume speaking
+synthesizer.continueSpeaking();
+
+//to stop speaking completely
+synthesizer.stopSpeaking();
