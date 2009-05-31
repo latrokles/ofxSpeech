@@ -1,0 +1,9 @@
+red
+green
+blue
+circle
+upper
+lower
+center
+bigger
+smaller
