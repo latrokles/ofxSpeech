@@ -1,0 +1,22 @@
+<install>
+        <version>001</version>
+        <author>Ruben Duque -- latrokles</author>
+        <url>samuraihippo.com</url>
+        <requires></requires>
+
+        <add>
+                <src>
+                        <folder name="addons/ofxSpeech/src">
+                                <file>../../../addons/ofxSpeech/src/ofxSpeech.h</file>
+                                <file>../../../addons/ofxSpeech/src/ofxSpeechRecognizer.h</file>
+                                <file>../../../addons/ofxSpeech/src/ofxSpeechRecognizer.cpp</file>
+                                <file>../../../addons/ofxSpeech/src/ofxSpeechSynthesizer.h</file>
+                                <file>../../../addons/ofxSpeech/src/ofxSpeechSynthesizer.cpp</file>
+                        </folder>
+                </src>
+
+                <include>
+                        <path>../../../addons/ofxSpeech/src</path>
+                </include>
+        </add>
+</install>
