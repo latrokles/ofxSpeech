@@ -63,11 +63,9 @@ ofxSpeechSynthesizer::ofxSpeechSynthesizer()
  */
 void ofxSpeechSynthesizer::initSynthesizer(std::string voice)
 {
-    std::cout << "Initiliazing synth" << std::endl;
     OSErr           errorStatus;
     VoiceSpec       theVoiceSpec;
 
-    std::cout << voice << std::endl;
     if(voice == "")
     {
         //-- Create a speech channel with a null voice spec, this returns the default system voice
@@ -98,7 +96,6 @@ std::map<std::string, int> ofxSpeechSynthesizer::getListOfVoices()
 
 std::string ofxSpeechSynthesizer::getCurrentVoice()
 {
-    std::cout << currentVoice << std::endl;
     return currentVoice;
 }
 
