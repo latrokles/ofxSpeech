@@ -18,6 +18,7 @@ void testApp::setup(){
     
     //synthesizer.listVoices();
     //-- initialize with voice
+    spelling = false;
     synthesizer.initSynthesizer("Alex");
     
     //-- intialize recognizer, load dictionary, and register callback
@@ -38,11 +39,25 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     displayFont.drawString(wordToDisplay, word_x, word_y);
+    
+    if(spelling)
+    {
+        ofDrawBitmapString("Spelling of words enabled.", 20, 20);
+    }
+    else
+    {
+        ofDrawBitmapString("Spelling of words disabled.", 20, 20);
+    }
 }
 
 
 //--------------------------------------------------------------
 void testApp::keyPressed  (int key){
+    if(key == ' ')
+    {
+        spelling = !spelling;
+        synthesizer.setCharacterByCharacter(spelling);
+    }
 }
 
 //--------------------------------------------------------------

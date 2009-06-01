@@ -28,6 +28,7 @@ class testApp : public ofBaseApp{
         string                          wordToDisplay;
         int                             word_x, word_y;
         int                             r, g, b;
+        bool                            spelling;
 };
 
 #endif
