@@ -19,6 +19,7 @@
  {
     public:
         ofxSpeechSynthesizer();
+        ~ofxSpeechSynthesizer();
         
         //-- Initiallize the speech synthesizer with a voice. If no voice is selected,
         //-- then the synthesizer starts with the default system voice

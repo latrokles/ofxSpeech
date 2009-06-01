@@ -56,6 +56,12 @@ ofxSpeechSynthesizer::ofxSpeechSynthesizer()
     }
 }
 
+ofxSpeechSynthesizer::~ofxSpeechSynthesizer()
+{
+    OSErr       errorStatus;
+    errorStatus = DisposeSpeechChannel(speechChannel);
+}
+
 /*
  * The initSynthesizer method creates the speech channel to be used by the 
  * synthesizer with the specified voice. If no voice is specified, then the

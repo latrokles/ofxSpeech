@@ -34,6 +34,14 @@ ofxSpeechRecognizer::ofxSpeechRecognizer()
     listening = false;
 }
 
+ofxSpeechRecognizer::~ofxSpeechRecognizer()
+{
+    OSErr       errorStatus;
+    stopListening();
+    
+    errorStatus = SRReleaseObject(speechRecognizer);
+    errorStatus = SRCloseRecognitionSystem(recognitionSystem);
+}
 /*
  * Initializes the recognizer, by opening the recognition system, creating a 
  * a recognizer, settting listening parameters, selecting a speech source (for 

@@ -26,6 +26,7 @@ class ofxSpeechRecognizer
 {
     public:
         ofxSpeechRecognizer();
+        ~ofxSpeechRecognizer();
         //-- Initializes the speech recognition system
         void initRecognizer();
         
