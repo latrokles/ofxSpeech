@@ -90,6 +90,12 @@ void ofxSpeechSynthesizer::initSynthesizer(std::string voice)
     }
 }
 
+void ofxSpeechSynthesizer::setVolume(float volume)
+{
+	CFNumberRef valueRef = CFNumberCreate(NULL, kCFNumberFloatType, &volume);
+	SetSpeechProperty(speechChannel, kSpeechVolumeProperty, valueRef);
+}
+
 void ofxSpeechSynthesizer::selectVoice(std::string voice)
 {
     //-- Allow for this???
