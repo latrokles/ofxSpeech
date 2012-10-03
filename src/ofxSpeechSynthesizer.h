@@ -56,6 +56,8 @@
         //-- Sets the synthesizer so that it spells out words, character by character
         //-- This spelling out includes digits as well (bug maybe?)
         void setCharacterByCharacter(bool enabled);
+	 
+		void setVolume(float volume);
         
     private:
         std::map<std::string, int>  voices;
