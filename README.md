@@ -14,48 +14,51 @@ Check out [this video](https://www.youtube.com/watch?v=aQZA8Im3UqA) to see the "
 1. Add the ofxSpeech to your project in the IDE (Xcode presumably).
 2. Add #include "ofxSpeech.h" in your testApp.h
 
+
 ## ofxSpeechRecognizer usage:
 
-Two things to keep in mind before beginning:
-- Add a function to your testApp.h/testApp.cpp that takes a string by reference, this function will get called when a word is recognized.
-i.e.
+1. **testApp.h** Add a function to your testApp that takes a string by reference, this function will get called when a word is recognized. Also declare a ofxSpeechRecognizer object.
+	
+        void speechRecognized(string & wordRecognized);
+        
+        ofxSpeechRecognizer recognizer;
 
-    void speechRecognized(string & wordRecognized);
+1. **setup** In the testApp.cpp setup() function, add the function mentioned above as a listener to a speechRecognized event and init the recognizer.
 
-- In the testApp.cpp setup() function, add the function mentioned above as a listener to a speechRecognized event. 
-i.e.
+        ofAddListener(recognizer.speechRecognizedEvent, this, &testApp::speechRecognized);
 
-    ofAddListener(recognizer.speechRecognizedEvent, this, &testApp::speechRecognized);
+        recognizer.initRecognizer();
 
-    ofxSpeechRecognizer recognizer;
-    recognizer.initRecognizer();
+    You can load a list of words to recognize from a file in your data directory containing each word in a separate line.
 
-    //You can load a list of words to recognize from a file in your data directory containing each word
-    //in a separate line.
-    recognizer.loadDictionaryFromFile("dictionary.txt");
+        recognizer.loadDictionaryFromFile("dictionary.txt");
 
-    //Alternatively you can have a vector of words and add them that way
-    vector<string> words;
-    words.push_back("red");
-    words.push_back("green");
-    words.push_back("black");
-    recognizer.loadDictionary(words);
+    Alternatively you can have a vector of words and add them that way
 
-    //startListening for words
-    recognizer.startListening();
+        vector<string> words;
+        words.push_back("red");
+        words.push_back("green");
+        words.push_back("black");
+        recognizer.loadDictionary(words);
 
-    //in the function defined in testApp.cpp place code to be executed once a given word is detected
-    void testApp::speechRecognized(string & wordRecognized)
-    {
-        if(wordRecognized == "red")
-            ofBackground(255, 0, 0);
+    startListening for words
 
-        if(wordRecognized == "green")
-            ofBackground(0, 255, 0);
-    }
+        recognizer.startListening();
 
-    //the recognized can be stopped
-    recognizer.stopListening();
+1. **speechRecognized** In the function defined in testApp.cpp place code to be executed once a given word is detected
+
+        void testApp::speechRecognized(string & wordRecognized)
+        {
+           if(wordRecognized == "red")
+             ofBackground(255, 0, 0);
+
+           if(wordRecognized == "green")
+             ofBackground(0, 255, 0);
+        }
+
+    the recognized can be stopped
+
+        recognizer.stopListening();
 
 
 ## ofxSpeechSynthesizer usage:
