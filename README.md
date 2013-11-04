@@ -19,21 +19,22 @@ Check out [this video](https://www.youtube.com/watch?v=aQZA8Im3UqA) to see the "
 Two things to keep in mind before beginning:
 - Add a function to your testApp.h/testApp.cpp that takes a string by reference, this function will get called when a word is recognized.
 i.e.
-void speechRecognized(string & wordRecognized);
+
+	void speechRecognized(string & wordRecognized);
 
 - In the testApp.cpp setup() function, add the function mentioned above as a listener to a speechRecognized event. 
 i.e.
+
 	ofAddListener(recognizer.speechRecognizedEvent, this, &testApp::speechRecognized);
 
 	ofxSpeechRecognizer recognizer;
 	recognizer.initRecognizer();
 
-- You can load a list of words to recognize from a file in your data directory containing each word
-in a separate line.
-
+	//You can load a list of words to recognize from a file in your data directory containing each word
+	//in a separate line.
 	recognizer.loadDictionaryFromFile("dictionary.txt");
 
-- Alternatively you can have a vector of words and add them that way
+	//Alternatively you can have a vector of words and add them that way
 	vector<string> words;
 	words.push_back("red");
 	words.push_back("green");
@@ -55,8 +56,6 @@ in a separate line.
 
 	//the recognized can be stopped
 	recognizer.stopListening();
-
-
 
 ## ofxSpeechSynthesizer usage:
 
