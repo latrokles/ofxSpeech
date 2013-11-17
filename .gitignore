@@ -1,9 +1,26 @@
-# xcode noise
-build/*
+#XCode
 *.pbxuser
+*.perspective
+*.perspectivev3
 *.mode1v3
+*.mode2v3
+#XCode 4
+xcuserdata
+*.xcworkspace
 
-# osx noise
+#OSX
 .DS_Store
-profile
-*.app
+*.swp
+*~.nib
+# Thumbnails
+._*
+
+[Bb]uild/
+[Oo]bj/
+*.o
+[Dd]ebug*/
+[Rr]elease*/
+*.mode*
+*.app/
+
+.DS_Store

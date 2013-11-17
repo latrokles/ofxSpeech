@@ -10,23 +10,6 @@
 ofEvent<std::string>        ofxSpeechRecognizer::speechRecognizedEvent;
 
 /*
- * Removes leading and trailing blank space from stringToClean.
- */
-void cleanUpString(std::string &stringToClean)
-{
-    if(!stringToClean.empty())
-    {
-        int firstCharacter      = stringToClean.find_first_not_of(" ");
-        int lastCharacter       = stringToClean.find_last_not_of(" ");
-        std::string tempString  = stringToClean;
-        stringToClean.erase();
-        
-        stringToClean           = tempString.substr(firstCharacter, (lastCharacter-firstCharacter + 1));
-    }
-    
-}
-
-/*
  * Instantiates an ofxSpeechRecognizer object and sets listening to false
  */
 ofxSpeechRecognizer::ofxSpeechRecognizer()
@@ -205,22 +188,14 @@ pascal OSErr ofxSpeechRecognizer::handleSpeechDone(const AppleEvent *theAEevt, A
     //-- Extract the words recognized in the result object
     if(!errorStatus)
     {
-        len = MAX_RECOGNITION_LEN - 1;
+
         errorStatus = SRGetProperty(recognitionResult, kSRTEXTFormat, resultStr, &len);
-        
         if(!errorStatus)
         {
             //-- We are done with the recognition result object, we can release it now
             SRReleaseObject(recognitionResult);
             
-            std::string wordRecognized = std::string(resultStr);
-            
-            /*
-             * Since the resulting string from the recgontionResult is 255 characters 
-             * in length, we want to strip out any leading or trailing blank space so 
-             * that we can compare it easily in the event handler inside of testApp
-             */
-            cleanUpString(wordRecognized);
+            std::string wordRecognized(resultStr, len);
             
             //-- Notify our speechRecognizedEvent listeners.
             ofNotifyEvent(speechRecognizedEvent, wordRecognized);
